@@ -9,12 +9,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool _obscurePassword = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-      ),
+      appBar: AppBar(title: const Text('Login')),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -34,21 +34,30 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 20),
 
               TextField(
-                obscureText: true,
+                obscureText: _obscurePassword,
                 decoration: InputDecoration(
                   hintText: 'Password',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
                   ),
                 ),
               ),
 
               const SizedBox(height: 20),
 
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text('Login'),
-              ),
+              ElevatedButton(onPressed: () {}, child: const Text('Login')),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
